@@ -6,6 +6,8 @@ const express = require('express');
 const hbs = require('hbs');
 const fs = require('fs');
 
+// for heroku
+const port = process.env.PORT || 3000;
 var app = express();
 hbs.registerPartials(__dirname + '/views/partials')
 app.set('view engine', 'hbs');
@@ -66,6 +68,9 @@ app.get('/bad', (req, res) => {
   });
 });
 
-app.listen(3000, () => {
-  console.log('Server is up on port 3000');
+// for heroku we'll use an environment variable that heroku
+// will set. This port will change as we use the app.
+// along with "start" script in package.json
+app.listen(port, () => {
+  console.log(`Server is up on port ${port}`);
 });
